@@ -10,18 +10,18 @@ if (!fs.existsSync(outputDir)) {
 }
 
 function mergeRowCells(cells) {
-  // Smart logic for rows like [Label, :, Value]
+ 
   if (
     cells.length === 3 &&
     cells[1].trim() === ':' &&
-    cells[0].length < 30 // likely a label, not data
+    cells[0].length < 30 
   ) {
     const key = `${cells[0].trim()}${cells[1].trim()}`;
     const value = cells[2].trim();
     return { [key]: value };
   }
 
-  // Fallback: map to Column1, Column2...
+  
   const rowData = {};
   cells.forEach((text, i) => {
     const key = `Column${i + 1}`;
@@ -73,5 +73,5 @@ fs.readFile(htmlFilePath, 'utf-8', (err, html) => {
 
   const outputPath = path.join(outputDir, 'all_tables.json');
   fs.writeFileSync(outputPath, JSON.stringify(allTablesData, null, 4));
-  console.log(`✅ Saved cleaned table data to ${outputPath}`);
+  console.log(` Saved cleaned table data to ${outputPath}`);
 });
